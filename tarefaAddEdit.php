@@ -15,9 +15,8 @@ if (isset($_GET['id'])){
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Dashboard</title>
+        <title><?php echo ($tarefa==null?"Adicionar":"Editar") ?> Tarefa</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body>
         <?php
@@ -26,7 +25,7 @@ if (isset($_GET['id'])){
 
         <main>
             <div class="form-container">
-                <h2>Adicionar Tarefa</h2>
+                <h2><?php echo ($tarefa==null?"Adicionar":"Editar") ?> Tarefa</h2>
                 <?php
                 if (isset($_GET['erro'])) {
                     echo "<p class='erroLogin'>Preencha todos os campos.</p>";
@@ -55,6 +54,12 @@ if (isset($_GET['id'])){
                             echo "<option value='" . $usuario->getId() . "' ".($tarefa==null?"":($tarefa->getIdUsuarioResponsavel()==$usuario->getId()?" selected ":""))." >" . $usuario->getNome() . "</option>";
                         }
                         ?>
+                    </select>
+                    
+                    <label for="concluida">Concluída:</label>
+                    <select id='concluida' name='concluida'>
+                        <option value='Não' <?php echo ($tarefa!=null&&$tarefa->getConcluida()=="Não"?"selected":"")?> >Não</option>
+                        <option value='Sim' <?php echo ($tarefa!=null&&$tarefa->getConcluida()=="Sim"?"selected":"")?> >Sim</option>
                     </select>
 
                     <label for="cor">Cor:</label>

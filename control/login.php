@@ -11,7 +11,7 @@ $lista = UsuarioDAO::getInstance()->listWhere($sql, $parametros, $valores);
 if (count($lista) > 0) {
     session_start();
     $_SESSION['idUsuarioLogado']=$lista[0]->getId();
-    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/gerenciadorDeTarefas/dashboard.php');
+    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/gerenciadorDeTarefas/');
     exit;
 } else {
     header('Location: http://' . $_SERVER['HTTP_HOST'] . '/gerenciadorDeTarefas/login.php?erro=true');

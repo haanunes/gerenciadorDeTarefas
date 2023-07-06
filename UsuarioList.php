@@ -11,7 +11,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/gerenciadorDeTarefas/control/checarUs
         <title>Dashboard</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="js/listarTarefas.js"></script>
+        <script src="js/listarUsuarios.js"></script>
 
         <script src="js/modal.js"></script>
     </head>
@@ -22,66 +22,28 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/gerenciadorDeTarefas/control/checarUs
 
         <main>
             <div class="form-container">
-                <h2>Listar Tarefas</h2>
+                <h2>Listar Usuários</h2>
 
                 <form id="formConsulta">
                     <div>
-                        <label for="titulo">Título:</label>
-                        <input type="text" id="titulo" placeholder="Título">
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" placeholder="Nome">
                     </div>
                     <div>
-                    <label for="idUsuarioResponsavel">Usuário Responsável:</label>
-                    <select id='idUsuarioResponsavel'>
-                        <option value='' >Selecione</option>
-                        <?php
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/gerenciadorDeTarefas/model/bo/UsuarioBO.php';
-                        $listaUsuarios = UsuarioBO::listarUsuariosOrdenadoPorNomeAscendente();
-                        foreach ($listaUsuarios as $usuario) {
-                            echo "<option value='" . $usuario->getId() . "' >" . $usuario->getNome() . "</option>";
-                        }
-                        ?>
-                    </select>
-                     </div>
-                    <div>
-                    <label for="idUsuarioCriador">Usuário Criador:</label>
-                    <select id='idUsuarioCriador'>
-                        <option value='' >Selecione</option>
-                        <?php
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/gerenciadorDeTarefas/model/bo/UsuarioBO.php';
-                        $listaUsuarios = UsuarioBO::listarUsuariosOrdenadoPorNomeAscendente();
-                        foreach ($listaUsuarios as $usuario) {
-                            echo "<option value='" . $usuario->getId() . "' >" . $usuario->getNome() . "</option>";
-                        }
-                        ?>
-                    </select>
-                     </div>
-                    <div>
-                    <label >Data de Criação:</label>
-                    <input type="date" id="dataCriacaoInicial" placeholder="Data de Criação Inicial">
-                    <input type="date" id="dataCriacaoFinal" placeholder="Data de Criação Final">
-                     </div>
-                    <div>
-                    <label >Data de Prazo:</label>
-                    <input type="date" id="dataPrazoInicial" placeholder="Data de Prazo Inicial">
-                    <input type="date" id="dataPrazoFinal" placeholder="Data de Prazo Final">
+                        <label for="email">E-mail:</label>
+                        <input type="text" id="email" placeholder="E-mail">
                     </div>
                 </form>
                 <table class="table" id='tabela'>
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Título</th>
-                            <th class='fixed-column'>Descrição</th>
-                            <th>Data de Criação</th>
-                            <th>Data de Prazo</th>
-                            <th>Usuário Criador</th>
-                            <th>Usuário Responsável</th>
-                            <th>Cor</th>
+                            <th>Id</th>
+                            <th>Nome</th>
+                            <th>E-mail</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-
 
                     </tbody>
                 </table>

@@ -3,7 +3,7 @@
     
     <nav>
         <ul>
-            <li><a href="<?php echo "http://" . $_SERVER['HTTP_HOST'] . "/gerenciadorDeTarefas/dashboard.php"; ?>">Home</a></li>
+            <li><a href="<?php echo "http://" . $_SERVER['HTTP_HOST'] . "/gerenciadorDeTarefas/index.php"; ?>">Home</a></li>
             <li class="dropdown">
                 <a href="#" class="dropbtn">Tarefas</a>
                 <div class="dropdown-content">

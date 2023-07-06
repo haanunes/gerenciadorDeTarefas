@@ -50,6 +50,11 @@ if (isset($_POST)){
         $parametros[]=":idUsuarioResponsavel";
         $valores[]=$_POST['idUsuarioResponsavel'];
     }
+    if (isset($_POST['concluida'])  && $_POST['concluida']!=""){
+        $sql.=" concluida = :concluida and";
+        $parametros[]=":concluida";
+        $valores[]=$_POST['concluida'];
+    }
     $sql.=" 1=1";
 }
 $sql.=" order by dataPrazo desc";

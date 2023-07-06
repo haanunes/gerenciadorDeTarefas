@@ -19,8 +19,8 @@ class TarefaDAO {
 
     public function insert(Tarefa $tarefa) {
         try {
-            $sql = "INSERT INTO tarefa (titulo,descricao,dataCriacao,dataPrazo,idUsuarioCriador,idUsuarioResponsavel,cor) "
-                    . "VALUES (:titulo,:descricao,:dataCriacao,:dataPrazo,:idUsuarioCriador,:idUsuarioResponsavel,:cor)";
+            $sql = "INSERT INTO tarefa (titulo,descricao,dataCriacao,dataPrazo,idUsuarioCriador,idUsuarioResponsavel,cor,concluida) "
+                    . "VALUES (:titulo,:descricao,:dataCriacao,:dataPrazo,:idUsuarioCriador,:idUsuarioResponsavel,:cor,:concluida)";
 
             $pdo = BDPDO::getInstance();
             $p_sql = $pdo->prepare($sql);
@@ -31,6 +31,7 @@ class TarefaDAO {
             $p_sql->bindValue(":idUsuarioCriador", $tarefa->getIdUsuarioCriador());
             $p_sql->bindValue(":idUsuarioResponsavel", $tarefa->getIdUsuarioResponsavel());
             $p_sql->bindValue(":cor", $tarefa->getCor());
+            $p_sql->bindValue(":concluida", $tarefa->getConcluida());
             $p_sql->execute();
             $ultimoId = $pdo->lastInsertId();
             return $ultimoId;
@@ -47,7 +48,8 @@ class TarefaDAO {
                     . "dataPrazo = :dataPrazo,"
                     . "idUsuarioCriador = :idUsuarioCriador,"
                     . "idUsuarioResponsavel = :idUsuarioResponsavel, "
-                    . "cor = :cor "
+                    . "cor = :cor, "
+                    . "concluida = :concluida "
                     . "where id=:id";
 
             $p_sql = BDPDO::getInstance()->prepare($sql);
@@ -58,6 +60,7 @@ class TarefaDAO {
             $p_sql->bindValue(":idUsuarioCriador", $tarefa->getIdUsuarioCriador());
             $p_sql->bindValue(":idUsuarioResponsavel", $tarefa->getIdUsuarioResponsavel());
             $p_sql->bindValue(":cor", $tarefa->getCor());
+            $p_sql->bindValue(":concluida", $tarefa->getConcluida());
             $p_sql->bindValue(":id", $tarefa->getId());
             return $p_sql->execute();
         } catch (Exception $e) {
@@ -99,6 +102,7 @@ class TarefaDAO {
         $obj->setIdUsuarioCriador($row['idUsuarioCriador']);
         $obj->setIdUsuarioResponsavel($row['idUsuarioResponsavel']);
         $obj->setCor($row['cor']);
+        $obj->setConcluida($row['concluida']);
         return $obj;
     }
 
@@ -122,8 +126,7 @@ class TarefaDAO {
 
             return $lista;
         } catch (Exception $e) {
-            print "Ocorreu um erro ao tentar executar esta ação, foi gerado
- um LOG do mesmo, tente novamente mais tarde." . $e->getMessage();
+            print "Ocorreu um erro ao tentar executar esta ação de listwere(".$restanteDoSQL.")" . $e->getMessage();
         }
     }
 

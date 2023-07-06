@@ -30,40 +30,49 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/gerenciadorDeTarefas/control/checarUs
                         <input type="text" id="titulo" placeholder="Título">
                     </div>
                     <div>
-                    <label for="idUsuarioResponsavel">Usuário Responsável:</label>
-                    <select id='idUsuarioResponsavel'>
-                        <option value='' >Selecione</option>
-                        <?php
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/gerenciadorDeTarefas/model/bo/UsuarioBO.php';
-                        $listaUsuarios = UsuarioBO::listarUsuariosOrdenadoPorNomeAscendente();
-                        foreach ($listaUsuarios as $usuario) {
-                            echo "<option value='" . $usuario->getId() . "' >" . $usuario->getNome() . "</option>";
-                        }
-                        ?>
-                    </select>
-                     </div>
+                        <label for="idUsuarioResponsavel">Usuário Responsável:</label>
+                        <select id='idUsuarioResponsavel'>
+                            <option value='' >Todos</option>
+                            <?php
+                            require_once $_SERVER['DOCUMENT_ROOT'] . '/gerenciadorDeTarefas/model/bo/UsuarioBO.php';
+                            $listaUsuarios = UsuarioBO::listarUsuariosOrdenadoPorNomeAscendente();
+                            foreach ($listaUsuarios as $usuario) {
+                                echo "<option value='" . $usuario->getId() . "' >" . $usuario->getNome() . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+
                     <div>
-                    <label for="idUsuarioCriador">Usuário Criador:</label>
-                    <select id='idUsuarioCriador'>
-                        <option value='' >Selecione</option>
-                        <?php
-                        require_once $_SERVER['DOCUMENT_ROOT'] . '/gerenciadorDeTarefas/model/bo/UsuarioBO.php';
-                        $listaUsuarios = UsuarioBO::listarUsuariosOrdenadoPorNomeAscendente();
-                        foreach ($listaUsuarios as $usuario) {
-                            echo "<option value='" . $usuario->getId() . "' >" . $usuario->getNome() . "</option>";
-                        }
-                        ?>
-                    </select>
-                     </div>
+                        <label for="idUsuarioCriador">Usuário Criador:</label>
+                        <select id='idUsuarioCriador'>
+                            <option value='' >Todos</option>
+                            <?php
+                            require_once $_SERVER['DOCUMENT_ROOT'] . '/gerenciadorDeTarefas/model/bo/UsuarioBO.php';
+                            $listaUsuarios = UsuarioBO::listarUsuariosOrdenadoPorNomeAscendente();
+                            foreach ($listaUsuarios as $usuario) {
+                                echo "<option value='" . $usuario->getId() . "' >" . $usuario->getNome() . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
                     <div>
-                    <label >Data de Criação:</label>
-                    <input type="date" id="dataCriacaoInicial" placeholder="Data de Criação Inicial">
-                    <input type="date" id="dataCriacaoFinal" placeholder="Data de Criação Final">
-                     </div>
+                        <label for="concluida">Concluída:</label>
+                        <select id='concluida'>
+                            <option value='' >Todas</option>
+                            <option value='Não' >Não</option>
+                            <option value='Sim' >Sim</option>
+                        </select>
+                    </div>
                     <div>
-                    <label >Data de Prazo:</label>
-                    <input type="date" id="dataPrazoInicial" placeholder="Data de Prazo Inicial">
-                    <input type="date" id="dataPrazoFinal" placeholder="Data de Prazo Final">
+                        <label >Data de Criação:</label>
+                        <input type="date" id="dataCriacaoInicial" placeholder="Data de Criação Inicial">
+                        <input type="date" id="dataCriacaoFinal" placeholder="Data de Criação Final">
+                    </div>
+                    <div>
+                        <label >Data de Prazo:</label>
+                        <input type="date" id="dataPrazoInicial" placeholder="Data de Prazo Inicial">
+                        <input type="date" id="dataPrazoFinal" placeholder="Data de Prazo Final">
                     </div>
                 </form>
                 <table class="table" id='tabela'>
@@ -76,6 +85,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/gerenciadorDeTarefas/control/checarUs
                             <th>Data de Prazo</th>
                             <th>Usuário Criador</th>
                             <th>Usuário Responsável</th>
+                            <th>Concluída</th>
                             <th>Cor</th>
                             <th></th>
                         </tr>

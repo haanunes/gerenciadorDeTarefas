@@ -93,6 +93,8 @@ nav ul li a {
 }
 
 .form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="password"],
 .form-container textarea,
 .form-container select,
 .form-container input[type="date"],
@@ -102,7 +104,6 @@ nav ul li a {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
-    box-sizing: border-box;
 }
 
 .form-container input[type="submit"] {
@@ -214,9 +215,6 @@ nav ul li a {
   margin-right: 10px;
 }
 #formConsulta select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   background-color: #fff;
   border: 1px solid #ccc;
   padding: 5px;
@@ -235,4 +233,40 @@ nav ul li a {
 }
 #tabela {
   overflow-x: auto;
+}
+.error-input {
+   border-color: red;
+}
+
+.error-message {
+   color: red;
+   font-size: 12px;
+   margin-top: 5px;
+}
+.password-input.error-input {
+  border: 1px solid red;
+}
+.chart-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.chart-container {
+    width: calc(50% - 20px);
+    margin-bottom: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.chart-container:first-child {
+    margin-left: 0;
+}
+
+@media (max-width: 768px) {
+    .chart-container {
+        width: 100%;
+        margin-right: 0;
+        margin-left: 0;
+    }
 }

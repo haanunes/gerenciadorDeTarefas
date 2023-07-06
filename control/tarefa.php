@@ -21,12 +21,13 @@ if (
     $tarefa->setTitulo($_POST['titulo']);
     $tarefa->setIdUsuarioResponsavel($_POST['idUsuarioResponsavel']);
     $tarefa->setIdUsuarioCriador($_SESSION['idUsuarioLogado']);
+    $tarefa->setConcluida($_POST['concluida']);
     if ($tarefa->getId() == 0) {
         TarefaDAO::getInstance()->insert($tarefa);
     } else {
         TarefaDAO::getInstance()->update($tarefa);
     }
-    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/gerenciadorDeTarefas/tarefalist.php');
+    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/gerenciadorDeTarefas/tarefaList.php');
 } else {
     header('Location: http://' . $_SERVER['HTTP_HOST'] . '/gerenciadorDeTarefas/tarefaAddEdit.php?erro=true');
     exit;

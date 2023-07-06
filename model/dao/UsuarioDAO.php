@@ -107,8 +107,7 @@ class UsuarioDAO {
 
             return $lista;
         } catch (Exception $e) {
-            print "Ocorreu um erro ao tentar executar esta ação, foi gerado
- um LOG do mesmo, tente novamente mais tarde." . $e->getMessage();
+            print "Ocorreu um erro ao tentar executar a ação de list were (".$restanteDoSQL.")." . $e->getMessage();
         }
     }
 
