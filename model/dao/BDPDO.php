@@ -10,7 +10,7 @@ class BDPDO {
 
     public static function getInstance() {
         if (!isset(self::$instancia)) {
-            self::$instance = new PDO('mysql:host=db;'
+            self::$instance = new PDO('mysql:host=localhost;'
                     . 'dbname=gerenciadordetarefas', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         }
         return self::$instance;
