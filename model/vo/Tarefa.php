@@ -12,6 +12,7 @@ class Tarefa {
     private $dataPrazo;
     private $idUsuarioCriador;
     private $idUsuarioResponsavel;
+    private $concluida;
     private $cor;
 
     public function getId() {
@@ -45,8 +46,15 @@ class Tarefa {
     public function getCor() {
         return $this->cor;
     }
+    public function getConcluida() {
+        return $this->concluida;
+    }
 
-    public function setId($id): void {
+    public function setConcluida($concluida): void {
+        $this->concluida = $concluida;
+    }
+
+        public function setId($id): void {
         $this->id = $id;
     }
 
@@ -90,7 +98,8 @@ class Tarefa {
             'usuarioCriador' => $this->getUsuarioCriador()->getNome(),
             'idUsuarioResponsavel' => $this->idUsuarioResponsavel,
             'usuarioResponsavel' => $this->getUsuarioResponsavel()->getNome(),
-            'cor' => $this->cor
+            'cor' => $this->cor,
+            'concluida' => $this->concluida,
         ];
     }
 

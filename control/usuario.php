@@ -1,34 +1,28 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/gerenciadorDeTarefas/model/dao/TarefaDAO.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/gerenciadorDeTarefas/model/vo/Tarefa.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/gerenciadorDeTarefas/model/dao/UsuarioDAO.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/gerenciadorDeTarefas/model/vo/Usuario.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/gerenciadorDeTarefas/control/checarUsuarioLogado.php';
 //validando atributos
 if (
-        isset($_POST['titulo']) && isset($_POST['titulo']) != "" &&
-        isset($_POST['descricao']) && isset($_POST['descricao']) != "" &&
-        isset($_POST['dataPrazo']) && isset($_POST['dataPrazo']) != "" &&
-        isset($_POST['cor']) && isset($_POST['cor']) != "" &&
-        isset($_POST['idUsuarioResponsavel']) && isset($_POST['idUsuarioResponsavel']) != "" &&
+        isset($_POST['nome']) && isset($_POST['nome']) != "" &&
+        isset($_POST['email']) && isset($_POST['email']) != "" &&
         isset($_POST['id'])
 ) {
-    $tarefa = new Tarefa();
-    $tarefa->setCor($_POST['cor']);
-    $tarefa->setDataCriacao(date("Y-m-d", time()));
-    $tarefa->setDataPrazo($_POST['dataPrazo']);
-    $tarefa->setDescricao($_POST['descricao']);
-    $tarefa->setId($_POST['id']);
-    $tarefa->setTitulo($_POST['titulo']);
-    $tarefa->setIdUsuarioResponsavel($_POST['idUsuarioResponsavel']);
-    $tarefa->setIdUsuarioCriador($_SESSION['idUsuarioLogado']);
-    if ($tarefa->getId() == 0) {
-        TarefaDAO::getInstance()->insert($tarefa);
+    $usuario = new Usuario();
+    $usuario->setNome($_POST['nome']);
+    $usuario->setEmail($_POST['email']);
+    if ($usuario->getId() == 0)
+        $usuario->setSenha($_POST['senha']);
+    $usuario->setId($_POST['id']);
+    if ($usuario->getId() == 0) {
+        UsuarioDAO::getInstance()->insert($usuario);
     } else {
-        TarefaDAO::getInstance()->update($tarefa);
+        UsuarioDAO::getInstance()->update($usuario);
     }
-    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/gerenciadorDeTarefas/tarefalist.php');
+    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/gerenciadorDeTarefas/usuarioList.php');
 } else {
-    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/gerenciadorDeTarefas/tarefaAddEdit.php?erro=true');
+    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/gerenciadorDeTarefas/usuarioAddEdit.php?erro=true');
     exit;
 }
 ?>

@@ -9,11 +9,12 @@
  * @author Hélder
  */
 class Usuario {
+
     private $id;
     private $nome;
     private $senha;
     private $email;
-    
+
     public function getId() {
         return $this->id;
     }
@@ -44,6 +45,15 @@ class Usuario {
 
     public function setEmail($email): void {
         $this->email = $email;
+    }
+
+    //json
+    public function jsonSerialize() {
+        return [
+            'id' => $this->id,
+            'nome' => $this->nome,
+            'email' => $this->email
+        ];
     }
 
 }

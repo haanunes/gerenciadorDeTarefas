@@ -1,21 +1,4 @@
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Other/javascript.js to edit this template
- */
-
-
-
-const data = {
-    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
-    datasets: [{
-            label: 'Vendas',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1
-        }]
-};
-
+var data;
 
 const options = {
     responsive: true,
@@ -26,10 +9,59 @@ const options = {
     }
 };
 
+$.ajax({
+    url: './control/graficoTarefasPorUsuarioResponsavel.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(response) {
+        data = response;
 
-const ctx = document.getElementById('myChart').getContext('2d');
-const myChart = new Chart(ctx, {
-    type: 'bar',
-    data: data,
-    options: options
+        const ctx = document.getElementById('myChart1').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    },
+    error: function() {
+    }
+});
+
+
+$.ajax({
+    url: './control/graficoTarefasPorUsuarioCriador.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(response) {
+        data = response;
+
+        // Criar o gráfico com os dados atualizados
+        const ctx = document.getElementById('myChart2').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    },
+    error: function() {
+    }
+});
+
+// Fazer a solicitação AJAX para buscar os dados
+$.ajax({
+    url: './control/graficoSituacaoTarefas.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(response) {
+        data = response;
+
+        const ctx = document.getElementById('myChart3').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    },
+    error: function() {
+    }
 });

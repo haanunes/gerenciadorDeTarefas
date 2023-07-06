@@ -1,17 +1,18 @@
 $(document).ready(function () {
     // Manipular os eventos de tecla pressionada e alteração do campo
-    $('#titulo, #idUsuarioResponsavel, #idUsuarioCriador, #dataCriacaoInicial, #dataCriacaoFinal, #dataPrazoInicial, #dataPrazoFinal').on('change', function () {
+    $('#titulo, #idUsuarioResponsavel, #idUsuarioCriador, #dataCriacaoInicial, #dataCriacaoFinal, #dataPrazoInicial, #dataPrazoFinal, #concluida').on('change', function () {
         var titulo = $('#titulo').val();
         var idUsuarioResponsavel = $('#idUsuarioResponsavel').val();
         var idUsuarioCriador = $('#idUsuarioCriador').val();
+        var concluida = $('#concluida').val();
         var dataCriacaoInicial = $('#dataCriacaoInicial').val();
         var dataCriacaoFinal = $('#dataCriacaoFinal').val();
         var dataPrazoInicial = $('#dataPrazoInicial').val();
         var dataPrazoFinal = $('#dataPrazoFinal').val();
 
         // Realizar a busca somente se houver algum valor nos campos
-        if (titulo || idUsuarioResponsavel || idUsuarioCriador || dataCriacaoInicial !== null || dataCriacaoFinal !== null || dataPrazoInicial !== null || dataPrazoFinal !== null) {
-            buscarTarefas(titulo, idUsuarioResponsavel, idUsuarioCriador, dataCriacaoInicial, dataCriacaoFinal, dataPrazoInicial, dataPrazoFinal);
+        if (titulo || concluida|| idUsuarioResponsavel || idUsuarioCriador || dataCriacaoInicial !== null || dataCriacaoFinal !== null || dataPrazoInicial !== null || dataPrazoFinal !== null) {
+            buscarTarefas(titulo, idUsuarioResponsavel, idUsuarioCriador, dataCriacaoInicial, dataCriacaoFinal, dataPrazoInicial, dataPrazoFinal, concluida);
         } else {
             // Limpar a tabela se os campos estiverem vazios
             $('#tabela tbody').empty();
@@ -26,10 +27,10 @@ $(document).ready(function () {
         var dataCriacaoFinal = $('#dataCriacaoFinal').val();
         var dataPrazoInicial = $('#dataPrazoInicial').val();
         var dataPrazoFinal = $('#dataPrazoFinal').val();
-
+         var concluida = $('#concluida').val();
         // Realizar a busca somente se houver algum valor nos campos
-        if (titulo || idUsuarioResponsavel || idUsuarioCriador || dataCriacaoInicial !== null || dataCriacaoFinal !== null || dataPrazoInicial !== null || dataPrazoFinal !== null) {
-            buscarTarefas(titulo, idUsuarioResponsavel, idUsuarioCriador, dataCriacaoInicial, dataCriacaoFinal, dataPrazoInicial, dataPrazoFinal);
+        if (titulo ||concluida|| idUsuarioResponsavel || idUsuarioCriador || dataCriacaoInicial !== null || dataCriacaoFinal !== null || dataPrazoInicial !== null || dataPrazoFinal !== null) {
+            buscarTarefas(titulo, idUsuarioResponsavel, idUsuarioCriador, dataCriacaoInicial, dataCriacaoFinal, dataPrazoInicial, dataPrazoFinal, concluida);
         } else {
             // Limpar a tabela se os campos estiverem vazios
             $('#tabela tbody').empty();
@@ -37,7 +38,7 @@ $(document).ready(function () {
     });
 
     // Função para buscar as tarefas
-    function buscarTarefas(titulo, idUsuarioResponsavel, idUsuarioCriador, dataCriacaoInicial, dataCriacaoFinal, dataPrazoInicial, dataPrazoFinal) {
+    function buscarTarefas(titulo, idUsuarioResponsavel, idUsuarioCriador, dataCriacaoInicial, dataCriacaoFinal, dataPrazoInicial, dataPrazoFinal,concluida) {
         // Enviar solicitação AJAX para buscar os dados
         $.ajax({
             url: 'control/listarBuscaTarefasJSON.php',
@@ -50,7 +51,8 @@ $(document).ready(function () {
                 dataCriacaoInicial: dataCriacaoInicial,
                 dataCriacaoFinal: dataCriacaoFinal,
                 dataPrazoInicial: dataPrazoInicial,
-                dataPrazoFinal: dataPrazoFinal
+                dataPrazoFinal: dataPrazoFinal,
+                concluida:concluida
             },
             success: function (response) {
                 // Limpar a tabela antes de adicionar os novos dados
@@ -70,9 +72,10 @@ $(document).ready(function () {
                         linha += '<td '+classDataAtrasada(tarefa.dataPrazo)+'>' + tarefa.dataPrazo + '</td>';
                         linha += '<td>' + tarefa.usuarioCriador + '</td>';
                         linha += '<td>' + tarefa.usuarioResponsavel + '</td>';
+                        linha += '<td>' + tarefa.concluida + '</td>';
                         linha += '<td style="background-color:' + tarefa.cor + '"></td>';
                         linha += '<td><a href="tarefaAddEdit.php?id=' + tarefa.id + '" class="button-link button-blue">Editar</a>'
-                        linha += '    <a href="tarefaDel.php?id=' + tarefa.id + '" class="button-link button-red">Excluir</a></td>'
+                        linha += '    <a data-link="./control/tarefaDel.php?id=' + tarefa.id + '" class="button-link button-red openModalBtn">Excluir</a></td>'
                         linha += '</tr>';
 
                         $('#tabela tbody').append(linha);
