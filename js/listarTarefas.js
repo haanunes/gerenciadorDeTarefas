@@ -69,7 +69,7 @@ $(document).ready(function () {
                         linha += '<td>' + tarefa.titulo + '</td>';
                         linha += '<td>' + tarefa.descricao + '</td>';
                         linha += '<td>' + tarefa.dataCriacao + '</td>';
-                        linha += '<td '+classDataAtrasada(tarefa.dataPrazo)+'>' + tarefa.dataPrazo + '</td>';
+                        linha += '<td '+classDataAtrasada(tarefa.dataPrazo,tarefa.concluida)+'>' + tarefa.dataPrazo + '</td>';
                         linha += '<td>' + tarefa.usuarioCriador + '</td>';
                         linha += '<td>' + tarefa.usuarioResponsavel + '</td>';
                         linha += '<td>' + tarefa.concluida + '</td>';
@@ -98,12 +98,15 @@ $(document).ready(function () {
     buscarTarefas('', '', '', null, null, null, null);
 
     // Verificar se a data está atrasada
-    function classDataAtrasada(data) {
+    function classDataAtrasada(data,concluida) {
         var dataAtual = new Date(); 
         var dataPrazo = new Date(data);
         dataAtual.setHours(0, 0, 0, 0);
         dataPrazo.setHours(0, 0, 0, 0);
-        if (dataPrazo < dataAtual) {
+        if(concluida=="Sim"){
+             return "style='color : green'"; // Data atrasada
+        }
+        else if (dataPrazo < dataAtual) {
             return "style='color : red'"; // Data atrasada
         } else if (dataPrazo > dataAtual) {
               return "style='color : blue'"; // Data não está atrasada

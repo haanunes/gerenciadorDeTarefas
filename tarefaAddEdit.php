@@ -26,11 +26,15 @@ if (isset($_GET['id'])){
         <main>
             <div class="form-container">
                 <h2><?php echo ($tarefa==null?"Adicionar":"Editar") ?> Tarefa</h2>
+                <p>
+                    Em ambos os formulários de cadastros (tarefa e usuários) é utilizado apenas uma página para adicionar e atualizar uma instancia no BD.
+                </p>
                 <?php
                 if (isset($_GET['erro'])) {
                     echo "<p class='erroLogin'>Preencha todos os campos.</p>";
                 }
                 ?>
+                
                 <form action="control/tarefa.php" method="POST">
                     <input type="hidden" name="id" value="<?php echo ($tarefa==null?"0":$tarefa->getId()) ?>" />
 

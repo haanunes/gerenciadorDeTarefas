@@ -13,8 +13,16 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/gerenciadorDeTarefas/control/checarUs
         <?php
         include $_SERVER['DOCUMENT_ROOT'] . "/gerenciadorDeTarefas/components/cabecalho.php";
         ?>
-
+        
         <main>
+            <div>
+                <p>
+                    Este é o index com um pequeno dashboard com 3 gráficos sendo gerados através de jQuery e Ajax.
+                </p>
+                <p>
+                    Caso deseja analisar, os gráficos estão sendo gerados no js/grafico.js e os json são obtidos a partir dos arquivos em control/grafico...
+                </p>
+            </div>
             <div class="chart-wrapper">
                 <div class="chart-container">
                     <canvas id="myChart1"></canvas>

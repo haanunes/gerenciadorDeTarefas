@@ -23,7 +23,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/gerenciadorDeTarefas/control/checarUs
         <main>
             <div class="form-container">
                 <h2>Listar Tarefas</h2>
-
+                <p>Em ambos os listar, o carregamento da tabela é realizado através de consultas AJAX.</p>
+                <p>A cor da fonte da data de prazo mudará de acordo com o seu prazo (vermelho=vencida, laranja=vence hoje, azul=possui prazo, verde=já foi concluída)</p>
                 <form id="formConsulta">
                     <div>
                         <label for="titulo">Título:</label>
